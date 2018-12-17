@@ -3,6 +3,7 @@ class Morseable
   def initialize(number)
     @number = number
   end
+  
   def generate_hash(number)
     # Esto es una aberración y debe ser refactorizado!
     h = '-----' if number == 0
@@ -15,9 +16,11 @@ class Morseable
     h = '--...' if number == 7
     h = '---..' if number == 8
     h = '----.' if number == 9
+    h
   end
+
   def to_morse
-    self.generate_hash(@number)
+    generate_hash(@number)
   end
 end
 m = Morseable.new(3)
