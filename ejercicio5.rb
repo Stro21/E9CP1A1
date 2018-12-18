@@ -5,17 +5,39 @@ class Morseable
   end
 
   def generate_hash(number)
-    # Esto es una aberración y debe ser refactorizado!
-    h = '-----' if number == 0
-    h = '.----' if number == 1
-    h = '..---' if number == 2
-    h = '...--' if number == 3
-    h = '....-' if number == 4
-    h = '.....' if number == 5
-    h = '-....' if number == 6
-    h = '--...' if number == 7
-    h = '---..' if number == 8
-    h = '----.' if number == 9
+    if number >= 0 && number <= 4
+      hash_minus(number)
+    else
+      hash_point(number)
+    end
+  end
+
+  def hash_minus(number)
+    h = '-----'
+    return h if number.zero?
+
+    i = 0
+    h.each_char do
+      h[i] = '.'
+      break if i == number - 1
+
+      i += 1
+    end
+    h
+  end
+
+  def hash_point(number)
+    h = '.....'
+    n = number - 5
+    return h if number == 5
+
+    i = 0
+    h.each_char do
+      h[i] = '-'
+      break if i == n - 1
+
+      i += 1
+    end
     h
   end
 
