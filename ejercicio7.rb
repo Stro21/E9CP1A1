@@ -8,11 +8,8 @@ class Product
     @small = small
   end
 
-  def print
-    puts name
-    puts large
-    puts medium
-    puts small
+  def data_archive
+    "#{name}, #{large}, #{medium}, #{small}\n"
   end
 end
 
@@ -23,10 +20,16 @@ def lista_de_productos(archivo)
   data.each do |prod|
     ls = prod.split(', ').map(&:chomp)
     name, large, medium, small = ls
-    lista_productos.push(Product.new(name, large.to_i, medium.to_i, small.to_i))
+    lista_productos.push(Product.new(name, large, medium, small.to_i))
   end
   lista_productos
 end
 
+def nuevo_catalogo(productos)
+  file = File.open('nuevo_catalogo.txt', 'w')
+  productos.each { |prod| file.puts prod.data_archive }
+  file.close
+end
+
 products_list = lista_de_productos('catalogo.txt')
-products_list.each { |prod| prod.print }
+nuevo_catalogo(products_list)
