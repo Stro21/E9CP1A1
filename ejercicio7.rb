@@ -26,7 +26,7 @@ def lista_de_productos(archivo)
 end
 
 def nuevo_catalogo(productos)
-  file = File.open('nuevo_catalogo.txt', 'w')
+  file = File.open('nuevo_catalogo.txt', 'a')
   productos.each { |prod| file.puts prod.data_archive }
   file.close
 end
