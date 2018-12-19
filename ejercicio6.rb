@@ -1,3 +1,5 @@
+# rubocop: disable LineLength
+
 # Class Product
 class Product
   attr_reader :name, :large, :medium, :small, :xsmall
@@ -10,16 +12,17 @@ class Product
   end
 
   def promedio
-    prom = (large + medium + small + xsmall) / 4
-    prom
+    (large + medium + small + xsmall) / 4
   end
 end
 products_list = []
 data = []
 File.open('catalogo.txt', 'r') { |file| data = file.readlines }
 data.each do |prod|
-  ls = prod.split(', ')
-  products_list << Product.new(ls[0], ls[1].to_i, ls[2].to_i, ls[3].to_i, ls[4].to_i)
+  ls = prod.split(', ').map(&:chomp)
+  name, large, medium, small, xsmall = ls
+  products_list.push(Product.new(name, large.to_i, medium.to_i, small.to_i, xsmall.to_i))
 end
-puts products_list
-products_list.each { |product| puts product.promedio }
+products_list.each { |producto| puts producto.promedio }
+
+# rubocop: enable LineLength
